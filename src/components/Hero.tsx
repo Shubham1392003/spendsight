@@ -10,7 +10,11 @@ const fadeUp = {
   show: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] },
+    transition: {
+      duration: 0.7,
+      delay,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
   }),
 };
 
@@ -73,20 +77,17 @@ export function Hero() {
           variants={fadeUp}
           className="flex flex-col sm:flex-row items-center gap-3"
         >
-          <Button
-            asChild
-            size="lg"
-            className="h-13 px-8 bg-white text-black hover:bg-neutral-100 rounded-full text-[15px] font-semibold shadow-[0_0_40px_rgba(255,255,255,0.14)] hover:shadow-[0_0_60px_rgba(255,255,255,0.26)] transition-all duration-500 group"
+          <Link
+            href="#audit"
+            className="inline-flex items-center justify-center h-12 px-8 bg-white text-black hover:bg-neutral-100 rounded-full text-[15px] font-semibold shadow-[0_0_40px_rgba(255,255,255,0.14)] hover:shadow-[0_0_60px_rgba(255,255,255,0.26)] transition-all duration-500 group"
           >
-            <Link href="#audit">
-              Start Free Audit
-              <ChevronRight className="ml-1.5 h-4 w-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
-            </Link>
-          </Button>
+            Start Free Audit
+            <ChevronRight className="ml-1.5 h-4 w-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
+          </Link>
           <Button
             size="lg"
             variant="outline"
-            className="h-13 px-8 rounded-full bg-white/[0.03] border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] text-white text-[15px] transition-all duration-300"
+            className="h-12 px-8 rounded-full bg-white/[0.03] border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] text-white text-[15px] transition-all duration-300"
           >
             See Example Report
           </Button>

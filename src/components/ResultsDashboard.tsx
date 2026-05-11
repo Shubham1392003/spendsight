@@ -285,7 +285,7 @@ export function ResultsDashboard({ data, result, onReset }: ResultsProps) {
                     color: "#fff",
                   }}
                   itemStyle={{ color: "#fff" }}
-                  formatter={(val: number) => [`$${val.toLocaleString()}`, ""]}
+                  formatter={(val) => [`$${Number(val ?? 0).toLocaleString()}`, ""]}
                 />
               </PieChart>
             </ResponsiveContainer>

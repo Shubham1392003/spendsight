@@ -168,7 +168,7 @@ export function AuditSection() {
                   {/* Tool + Plan row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <FormField label="Primary AI Tool">
-                      <Select value={formData.tool} onValueChange={(v) => setFormData({ ...formData, tool: v })}>
+                      <Select value={formData.tool} onValueChange={(v) => setFormData({ ...formData, tool: v || formData.tool })}>
                         <SelectTrigger
                           id="tool-select"
                           className="bg-black/40 border-white/[0.08] text-white h-11 rounded-xl focus:ring-1 focus:ring-white/25 hover:border-white/15 transition-all duration-200"
@@ -184,7 +184,7 @@ export function AuditSection() {
                     </FormField>
 
                     <FormField label="Current Plan">
-                      <Select value={formData.plan} onValueChange={(v) => setFormData({ ...formData, plan: v })}>
+                      <Select value={formData.plan} onValueChange={(v) => setFormData({ ...formData, plan: v || formData.plan })}>
                         <SelectTrigger
                           id="plan-select"
                           className="bg-black/40 border-white/[0.08] text-white h-11 rounded-xl focus:ring-1 focus:ring-white/25 hover:border-white/15 transition-all duration-200"
@@ -216,7 +216,7 @@ export function AuditSection() {
                       min={0}
                       max={10000}
                       step={100}
-                      onValueChange={(val) => setFormData({ ...formData, spend: val[0] })}
+                      onValueChange={(val) => setFormData({ ...formData, spend: Array.isArray(val) ? val[0] : val })}
                       className="cursor-grab active:cursor-grabbing"
                     />
                   </FormField>
@@ -237,14 +237,14 @@ export function AuditSection() {
                       min={1}
                       max={500}
                       step={1}
-                      onValueChange={(val) => setFormData({ ...formData, seats: val[0] })}
+                      onValueChange={(val) => setFormData({ ...formData, seats: Array.isArray(val) ? val[0] : val })}
                       className="cursor-grab active:cursor-grabbing"
                     />
                   </FormField>
 
                   {/* Use Case */}
                   <FormField label="Primary Use Case">
-                    <Select value={formData.useCase} onValueChange={(v) => setFormData({ ...formData, useCase: v })}>
+                    <Select value={formData.useCase} onValueChange={(v) => setFormData({ ...formData, useCase: v || formData.useCase })}>
                       <SelectTrigger
                         id="usecase-select"
                         className="bg-black/40 border-white/[0.08] text-white h-11 rounded-xl focus:ring-1 focus:ring-white/25 hover:border-white/15 transition-all duration-200"

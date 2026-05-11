@@ -48,12 +48,12 @@ export function Navbar() {
           >
             Log in
           </Button>
-          <Button
-            asChild
-            className="bg-white text-black hover:bg-neutral-100 rounded-full px-5 font-semibold text-sm shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.28)] transition-all duration-300"
+          <Link
+            href="#audit"
+            className="inline-flex items-center justify-center bg-white text-black hover:bg-neutral-100 rounded-full px-5 py-2 font-semibold text-sm shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.28)] transition-all duration-300"
           >
-            <Link href="#audit">Start Free Audit</Link>
-          </Button>
+            Start Free Audit
+          </Link>
         </div>
       </div>
     </motion.nav>
