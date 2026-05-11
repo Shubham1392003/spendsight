@@ -2,6 +2,8 @@
 
 > **AI Infrastructure Audit Platform** — Instantly audit your AI stack, uncover waste, and reduce costs with enterprise-grade precision.
 
+**🚀 Live Demo: [spendsight-and1.vercel.app](https://spendsight-and1.vercel.app)**
+
 SpendSight AI is a production-ready, full-stack SaaS platform for lean startups and engineering teams. It scans your current AI tool stack (ChatGPT, Claude, Cursor, Copilot, APIs) and generates actionable, personalized savings recommendations with a shareable public report — zero login required.
 
 **Built with:** Next.js 16 (App Router) · Tailwind CSS v4 · shadcn/ui · Framer Motion · Supabase · OpenAI · Resend · Vitest
