@@ -1,0 +1,60 @@
+name: SpendSight CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚀 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js (Latest LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Latest LTS
+          cache: 'npm'       # Automatically caches ~/.npm across workflow runs
+
+      - name: 📦 Install Dependencies
+        # npm ci is faster and strictly adheres to package-lock.json
+        # --no-audit prevents slow vulnerability scans during CI
+        # --prefer-offline uses the cache over network when possible
+        run: npm ci --no-audit --prefer-offline
+
+      - name: 🧹 Run ESLint
+        run: npm run lintGenerate a professional ARCHITECTURE.md document for SpendSight AI.
+
+Include:
+- Mermaid system architecture diagram
+- full data flow
+- frontend architecture
+- backend architecture
+- Supabase integration
+- API flow
+- audit engine flow
+- report generation flow
+- shareable URL architecture
+- localStorage persistence
+
+Also explain:
+- why Next.js App Router was chosen
+- why Tailwind + shadcn was chosen
+- why Supabase was chosen
+- scaling considerations for 10k audits/day
+- caching strategy
+- performance optimizations
+- accessibility decisions
+
+Tone:
+- senior engineer
+- startup CTO level
+- concise but detailed
+
+      - name: 🧪 Run Vitest Suite
+        run: npm run test
