@@ -8,7 +8,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: Request) {
   try {
     const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
-    const rateLimit = checkRateLimit(ip);
+    const rateLimit = checkRateLimit(ip, "send-report");
 
     if (!rateLimit.success) {
       return NextResponse.json(

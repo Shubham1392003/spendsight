@@ -4,7 +4,7 @@ import { checkRateLimit } from '@/lib/rateLimit';
 export async function POST(request: Request) {
   try {
     const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
-    const rateLimit = checkRateLimit(ip);
+    const rateLimit = checkRateLimit(ip, "generate-summary");
 
     if (!rateLimit.success) {
       return NextResponse.json(

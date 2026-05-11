@@ -37,6 +37,15 @@ function AISummaryCard({ data, result }: { data: AuditFormData; result: AuditRes
             recommendations: result.recommendations,
           }),
         });
+
+        if (res.status === 429) {
+          if (mounted) {
+            setSummary("AI summary is temporarily unavailable — you have run several audits in quick succession. Your results and savings calculations above are fully accurate. Wait a moment and refresh to generate an AI summary.");
+            setLoading(false);
+          }
+          return;
+        }
+
         const json = await res.json();
         if (mounted) {
           setSummary(json.summary);

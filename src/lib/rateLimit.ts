@@ -1,9 +1,7 @@
 /**
  * In-memory rate limiter for Next.js App Router API Routes.
- * Note: In a true multi-region serverless deployment (like Vercel Edge), 
- * this state does not persist across instances. For a production app with 
- * heavy traffic, Upstash Redis (@upstash/ratelimit) should be swapped in.
- * For an internship demo or single-instance deployment, this is highly effective.
+ * Each namespace (route) has its own independent counter.
+ * In a multi-region serverless deployment use @upstash/ratelimit instead.
  */
 
 type RateLimitInfo = {
@@ -13,19 +11,24 @@ type RateLimitInfo = {
 
 const rateLimitCache = new Map<string, RateLimitInfo>();
 
-export function checkRateLimit(ip: string): { success: boolean; limit: number; remaining: number; resetTime: number } {
-  const limit = 5; // Max 5 requests
-  const windowMs = 60 * 1000; // per 1 minute (60,000 ms)
+export function checkRateLimit(
+  ip: string,
+  namespace = "default"
+): { success: boolean; limit: number; remaining: number; resetTime: number } {
+  const limit = 5; // Max 5 requests per namespace
+  const windowMs = 60 * 1000; // per 1 minute
   const now = Date.now();
 
-  let info = rateLimitCache.get(ip);
+  // Key includes namespace so each route tracks independently
+  const key = `${namespace}:${ip}`;
+  let info = rateLimitCache.get(key);
 
   if (!info || now > info.resetTime) {
     info = { count: 0, resetTime: now + windowMs };
   }
 
   info.count += 1;
-  rateLimitCache.set(ip, info);
+  rateLimitCache.set(key, info);
 
   const remaining = Math.max(0, limit - info.count);
 
@@ -33,6 +36,7 @@ export function checkRateLimit(ip: string): { success: boolean; limit: number; r
     success: info.count <= limit,
     limit,
     remaining,
-    resetTime: info.resetTime
+    resetTime: info.resetTime,
   };
 }
+
